@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cx.ajax.app.beans.ShoppingCart;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet("/addToCart")
 public class AddToCartServlet extends HttpServlet {
@@ -37,17 +38,21 @@ public class AddToCartServlet extends HttpServlet {
 		sc.addToCart(bookName, price);
 		// 4.准备响应的json对象{"bookName":"","totalBookNumber":1,"totalMoney":1}
 		// 若从服务端返回json字符串，则属性名必须使用双引号
-		StringBuilder result = new StringBuilder();
-		result.append("{")
-			  .append("\"bookName\":\""+bookName+"\"")
-			  .append(",")
-			  .append("\"totalBookNumber\":"+sc.getTotalBookNumber())
-			  .append(",")
-			  .append("\"totalMoney\":"+sc.getTotalMoney())
-			  .append("}");
+//		StringBuilder result = new StringBuilder();
+//		result.append("{")
+//			  .append("\"bookName\":\""+bookName+"\"")
+//			  .append(",")
+//			  .append("\"totalBookNumber\":"+sc.getTotalBookNumber())
+//			  .append(",")
+//			  .append("\"totalMoney\":"+sc.getTotalMoney())
+//			  .append("}");
+		ObjectMapper mapper = new ObjectMapper();
+		String result = mapper.writeValueAsString(sc);
+		System.out.println(result);
+		
 		// 5.响应json对象
 		response.setContentType("text/javascript");
-		response.getWriter().print(result.toString());
+		response.getWriter().print(result);
 	}
 
 }

@@ -40,3 +40,26 @@ $.getJSON(url,args.function(data){
 
 })
 
+5.使用JackSon
+①.加入jar包
+jackson-annotations-2.1.5.jar
+jackson-core-2.1.5.jar
+jackson-databind-2.1.5.jar
+
+②.具体的使用步骤
+
+Ⅰ.创建com.fasterxml.jackson.databind.ObjectMapper对象
+Ⅱ.调用ObjectMapper的writeValueAsString方法把java对象或集合转为Json字符串
+
+ObjectMapper mapper = new ObjectMapper();
+
+String jsonStr = mapper.writeValueAsString(customer);
+
+Ⅲ.注意
+
+①.JackSon根据getter来定位json对象的属性，而不是字段
+
+②.可以在类的getter方法上添加注解com.fasterxml.jackson.annotation.JsonIgnore。在转为JSON对象时以忽略该属性
+
+
+
