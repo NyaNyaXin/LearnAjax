@@ -61,5 +61,10 @@ String jsonStr = mapper.writeValueAsString(customer);
 
 ②.可以在类的getter方法上添加注解com.fasterxml.jackson.annotation.JsonIgnore。在转为JSON对象时以忽略该属性
 
+**使用BlockUI
+ajax请求发出时执行$.blockUI，ajax响应送达时执行$.unblockUI
+$(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
+可以对样式做出修改：需要把$.blockUI包含在一个function中
 
 
